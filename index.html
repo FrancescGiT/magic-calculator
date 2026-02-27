@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Calculadora</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="https://upload.wikimedia.org/wikipedia/commons/4/4b/Apple_Calculator_icon.png">
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <div id="magic-zone"></div>
     <div id="app">
@@ -15,7 +20,8 @@
             <div class="header-icon">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" class="clock-svg">
                     <circle cx="12" cy="12" r="10" stroke="white" stroke-width="1.5"></circle>
-                    <polyline points="12 6 12 12 16 14" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></polyline>
+                    <polyline points="12 6 12 12 16 14" stroke="white" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round"></polyline>
                 </svg>
             </div>
             <div class="header-icon">
@@ -41,9 +47,10 @@
             <div class="keypad">
                 <button class="btn btn-gray icon-btn" id="btn-backspace">
                     <svg width="32" height="32" viewBox="0 0 24 24" fill="none" class="backspace-svg">
-                        <path d="M8.5 4h11.5A2.5 2.5 0 0 1 22.5 6.5v11a2.5 2.5 0 0 1-2.5 2.5H8.5L2 12l6.5-8z" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
-                        <line x1="12" y1="9" x2="18" y2="15" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-                        <line x1="18" y1="9" x2="12" y2="15" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M8.5 4h11.5A2.5 2.5 0 0 1 22.5 6.5v11a2.5 2.5 0 0 1-2.5 2.5H8.5L2 12l6.5-8z"
+                            stroke="white" stroke-width="1.5" stroke-linejoin="round" />
+                        <line x1="12" y1="9" x2="18" y2="15" stroke="white" stroke-width="1.5" stroke-linecap="round" />
+                        <line x1="18" y1="9" x2="12" y2="15" stroke="white" stroke-width="1.5" stroke-linecap="round" />
                     </svg>
                 </button>
                 <button class="btn btn-gray" id="btn-clear">AC</button>
@@ -65,7 +72,8 @@
                 <button class="btn btn-dark num-btn" data-num="3">3</button>
                 <button class="btn btn-orange op-btn" id="btn-add" data-op="+">+</button>
 
-                <button class="btn btn-dark" id="btn-sign"><span>+</span><span style="font-size:22px">/</span><span>−</span></button>
+                <button class="btn btn-dark" id="btn-sign"><span>+</span><span
+                        style="font-size:22px">/</span><span>−</span></button>
                 <button class="btn btn-dark num-btn" data-num="0">0</button>
                 <button class="btn btn-dark" id="btn-comma">,</button>
                 <button class="btn btn-orange" id="btn-equal">=</button>
@@ -74,4 +82,5 @@
     </div>
     <script src="script.js"></script>
 </body>
+
 </html>

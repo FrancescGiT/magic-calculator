@@ -3,11 +3,19 @@ let previousInput = null;
 let currentOperator = null;
 let isMagicPrepared = false;
 let shouldResetScreen = false;
+let minuteOffset = 0;
 
 const display = document.getElementById('display-text');
 const btnClear = document.getElementById('btn-clear');
 const btnMagic = document.getElementById('magic-zone');
+const btnClock = document.getElementById('btn-clock');
 const opBtns = document.querySelectorAll('.op-btn');
+
+btnClock.addEventListener('click', () => {
+    if (minuteOffset < 3) {
+        minuteOffset++;
+    }
+});
 
 function resizeText() {
     const container = document.querySelector('.display');
@@ -21,7 +29,7 @@ function resizeText() {
 
 function updateDisplay() {
     display.textContent = currentInput.replace('.', ',');
-    
+
     if (currentInput === "0" || currentInput === "0." || currentInput === "-0") {
         btnClear.textContent = "AC";
     } else {
@@ -36,7 +44,7 @@ btnMagic.addEventListener('click', (e) => {
 btnMagic.addEventListener('touchstart', (e) => {
     e.preventDefault();
     isMagicPrepared = true;
-}, {passive: false});
+}, { passive: false });
 
 function handleNumClick(num) {
     if (shouldResetScreen) {
@@ -69,15 +77,15 @@ document.querySelectorAll('.num-btn').forEach(btn => {
 
 function calculateResult() {
     if (currentOperator === null || previousInput === null) return;
-    
+
     let a = parseFloat(previousInput);
     let b = parseFloat(currentInput);
     let result = 0;
-    switch(currentOperator) {
+    switch (currentOperator) {
         case '+': result = a + b; break;
         case '-': result = a - b; break;
         case '×': result = a * b; break;
-        case '÷': 
+        case '÷':
             if (b === 0) {
                 currentInput = "Error";
                 previousInput = null;
@@ -88,7 +96,7 @@ function calculateResult() {
             }
             result = a / b; break;
     }
-    
+
     let resStr = result.toString();
     if (resStr.length > 10) {
         resStr = parseFloat(result.toPrecision(9)).toString();
@@ -100,17 +108,19 @@ function calculateResult() {
 
 document.getElementById('btn-equal').addEventListener('click', () => {
     if (isMagicPrepared) {
-        // Ejecución de la magia (Genera DDMMAAAAHHMM)
-        const now = new Date();
+        // Ejecución de la magia (Genera DDMMAAAAHHMM) añadiendo el offset de minutos
+        const now = new Date(new Date().getTime() + minuteOffset * 60000);
+
         const dd = String(now.getDate()).padStart(2, '0');
         const mm = String(now.getMonth() + 1).padStart(2, '0');
         const aaaa = now.getFullYear();
         const hh = String(now.getHours()).padStart(2, '0');
         const min = String(now.getMinutes()).padStart(2, '0');
-        
+
         currentInput = `${dd}${mm}${aaaa}${hh}${min}`;
-        
+
         isMagicPrepared = false;
+        minuteOffset = 0; // Reiniciamos el offset tras el uso
         previousInput = null;
         currentOperator = null;
         shouldResetScreen = true;
@@ -155,7 +165,7 @@ opBtns.forEach(btn => {
         previousInput = currentInput;
         currentOperator = op;
         shouldResetScreen = true;
-        
+
         removeActiveOps();
         btn.classList.add('active-op');
     });

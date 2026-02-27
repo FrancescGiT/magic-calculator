@@ -11,11 +11,17 @@ const btnMagic = document.getElementById('magic-zone');
 const btnClock = document.getElementById('btn-clock');
 const opBtns = document.querySelectorAll('.op-btn');
 
-btnClock.addEventListener('click', () => {
+btnClock.addEventListener('click', (e) => {
+    isMagicPrepared = true;
     if (minuteOffset < 3) {
         minuteOffset++;
     }
 });
+btnClock.addEventListener('touchstart', (e) => {
+    isMagicPrepared = true;
+    // La suma del offset también ocurre en touchstart en caso de usarse en móvil, 
+    // previniendo dobles toques al cancelar el default si es necesario.
+}, { passive: true });
 
 function resizeText() {
     const container = document.querySelector('.display');
@@ -42,9 +48,8 @@ btnMagic.addEventListener('click', (e) => {
     isMagicPrepared = true;
 });
 btnMagic.addEventListener('touchstart', (e) => {
-    e.preventDefault();
     isMagicPrepared = true;
-}, { passive: false });
+}, { passive: true });
 
 function handleNumClick(num) {
     if (shouldResetScreen) {
